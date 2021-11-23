@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useFonts } from 'expo-font';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import {
   StyleSheet,
@@ -19,6 +20,14 @@ const STATUS_BAR_HEIGHT =
   Platform.OS === 'ios' ? getStatusBarHeight() : StatusBar.currentHeight;
 
 export default function App() {
+  const [loaded] = useFonts({
+    NunitoRegular: require('./src/assets/fonts/Nunito-Regular.ttf'),
+    NunitoBold: require('./src/assets/fonts/Nunito-Bold.ttf'),
+  });
+
+  if (!loaded) {
+    return null;
+  }
   const [todos, setTodos] = useState([]);
 
   const addTodo = title => {

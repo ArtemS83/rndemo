@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 export const Navbar = ({ title }) => {
   return (
     <View style={styles.navbar}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={{ ...styles.text, fontFamily: 'NunitoBold' }}>{title}</Text>
     </View>
   );
 };

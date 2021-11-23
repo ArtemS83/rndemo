@@ -28,7 +28,14 @@ export const Todo = ({ todo, onRemoveTodo }) => {
     >
       <View style={styles.viewBox}>
         <View style={styles.textBox}>
-          <Text style={styles.text}>{todo.title}</Text>
+          <Text
+            style={{
+              ...styles.text,
+              fontFamily: isSelected ? 'NunitoBold' : 'NunitoRegular',
+            }}
+          >
+            {todo.title}
+          </Text>
         </View>
         <Checkbox
           value={isSelected}
