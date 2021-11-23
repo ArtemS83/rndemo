@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ScrollView, FlatList } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  FlatList,
+  StatusBar,
+  ImageBackground,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { Navbar } from './src/components/Navbar';
 import { AddTodo } from './src/components/AddTodo';
 import { TodosList } from './src/components/TodosList';
+
+const STATUS_BAR_HEIGHT =
+  Platform.OS === 'ios' ? getStatusBarHeight() : StatusBar.currentHeight;
 
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -20,19 +34,44 @@ export default function App() {
   };
 
   return (
-    <View>
-      <Navbar title="Todo App" />
-      <View style={styles.container}>
-        <AddTodo onSubmit={addTodo} />
-        <TodosList todos={todos} onRemoveTodo={removeTodo} />
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
+      <View style={{ flex: 1 }}>
+        <StatusBar
+          backgroundColor="#3949ab"
+          style={{
+            width: '100%',
+            height: STATUS_BAR_HEIGHT,
+          }}
+        />
+        <Navbar title="Todo App" />
+        <ImageBackground
+          source={require('./src/assets/images/bgi.jpg')}
+          resizeMode="cover"
+          style={styles.image}
+        >
+          <View style={styles.container}>
+            <AddTodo onSubmit={addTodo} />
+            <TodosList todos={todos} onRemoveTodo={removeTodo} />
+          </View>
+        </ImageBackground>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingHorizontal: 30,
     paddingVertical: 20,
+  },
+  image: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
   },
 });

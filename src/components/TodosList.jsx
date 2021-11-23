@@ -19,27 +19,11 @@ export const TodosList = ({ todos, onRemoveTodo }) => {
       )}
       keyExtractor={item => item.id}
     />
-    // <ScrollView style={styles.list}>
-    //   {todos.map(({ title, id }) => (
-    //     <Text style={styles.todo} key={id}>
-    //       {title}
-    //     </Text>
-    //   ))}
-    // </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   list: {
-    marginVertical: 20,
+    marginTop: 20,
   },
-  //   todo: {
-  //     flexDirection: 'row',
-  //     alignItems: 'center',
-  //     padding: 15,
-  //     marginBottom: 10,
-  //     borderWidth: 1,
-  //     borderColor: '#eee',
-  //     borderRadius: 5,
-  //   },
 });
