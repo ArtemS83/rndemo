@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import {
@@ -11,6 +11,8 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Dimensions,
+  useWindowDimensions,
 } from 'react-native';
 import { Navbar } from './src/components/Navbar';
 import { AddTodo } from './src/components/AddTodo';
@@ -19,16 +21,35 @@ import { TodosList } from './src/components/TodosList';
 const STATUS_BAR_HEIGHT =
   Platform.OS === 'ios' ? getStatusBarHeight() : StatusBar.currentHeight;
 
+// const windowWidth = Dimensions.get('window').width;
+// const windowHeight = Dimensions.get('window').height;
+
 export default function App() {
-  const [loaded] = useFonts({
+  const [todos, setTodos] = useState([]);
+  const { height, width } = useWindowDimensions();
+
+  // const [dimensions, setDimensions] = useState({ windowWidth, windowHeight });
+  // useEffect(() => {
+  //   const onChange = () => {
+  //     setDimensions({
+  //       windowWidth: Dimensions.get('window').width,
+  //       windowHeight: Dimensions.get('window').height,
+  //     });
+  //   };
+  //   const subscription = Dimensions.addEventListener('change', onChange);
+  //   return () => {
+  //     subscription?.remove();
+  //   };
+  // }, []);
+
+  const [fontsLoaded] = useFonts({
     NunitoRegular: require('./src/assets/fonts/Nunito-Regular.ttf'),
     NunitoBold: require('./src/assets/fonts/Nunito-Bold.ttf'),
   });
 
-  if (!loaded) {
+  if (!fontsLoaded) {
     return null;
   }
-  const [todos, setTodos] = useState([]);
 
   const addTodo = title => {
     const newTodo = {
@@ -62,7 +83,13 @@ export default function App() {
           resizeMode="cover"
           style={styles.image}
         >
-          <View style={styles.container}>
+          <View
+            style={{
+              ...styles.container,
+              // paddingHorizontal: dimensions.windowWidth < dimensions.windowHeight ? 30 : 100,
+              paddingHorizontal: width < height ? 30 : 100,
+            }}
+          >
             <AddTodo onSubmit={addTodo} />
             <TodosList todos={todos} onRemoveTodo={removeTodo} />
           </View>
@@ -75,7 +102,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 30,
+    paddingHorizontal: 30, // 100
     paddingVertical: 20,
   },
   image: {
