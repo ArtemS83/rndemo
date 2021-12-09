@@ -19,7 +19,6 @@ export const Todo = ({ todo, onRemoveTodo }) => {
     <TouchableOpacity
       style={styles.todoBox}
       onPress={() => {
-        // console.log(todo.id);
         setSelection(!isSelected);
       }}
       //   onLongPress={() => onRemoveTodo(todo.id)}
