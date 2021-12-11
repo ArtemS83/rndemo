@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-const Login = ({ navigation }) => {
+
+const Register = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Login Screen</Text>
+      <Text style={styles.text}>Register Screen</Text>
       <Button
-        title="Link to Register"
-        onPress={() => navigation.navigate('Register')}
+        title="Link to Login"
+        onPress={() => navigation.navigate('Login')}
       />
     </View>
   );
@@ -15,13 +16,14 @@ const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'pink',
   },
   text: {
     marginBottom: 25,
-    color: 'blue',
+    color: 'tomato',
   },
 });
 
-export default Login;
+export default Register;

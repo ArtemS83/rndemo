@@ -5,9 +5,9 @@ import {
   useWindowDimensions,
   ImageBackground,
 } from 'react-native';
-import { Navbar } from '../components/Navbar';
-import { AddTodo } from '../components/AddTodo';
-import { TodosList } from '../components/TodosList';
+
+import { AddTodo } from '../../components/AddTodo';
+import { TodosList } from '../../components/TodosList';
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
@@ -29,11 +29,10 @@ export default function Home() {
   return (
     <>
       <ImageBackground
-        source={require('../assets/images/bgi.jpg')}
+        source={require('../../assets/images/bgi.jpg')}
         resizeMode="cover"
         style={styles.image}
       >
-        <Navbar title="Todo App" />
         <View
           style={{
             ...styles.container,
